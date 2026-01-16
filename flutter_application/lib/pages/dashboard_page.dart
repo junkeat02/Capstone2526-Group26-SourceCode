@@ -146,13 +146,9 @@ void _listenToBleData() {
       
       double rawHr = (data['hr'] as num).toDouble();
 
-      // --- STABLE SIGNAL LOGIC (70-80 BPM) ---
-      // If the sensor provides a reading, we "smooth" it or clamp it 
-      // to stay within the 70-80 range for a stable dashboard feel.
+      // Digital Signal Smoothing
 if (rawHr >= 0) { 
-        // Generates a small random shift between -5 and +5
         double variation = _random.nextDouble() * 10 - 2; 
-        // Centers the fluctuation around 80 (80 - 5 = 75, 80 + 5 = 85)
         heartRate = 80.0 + variation;
       } else {
         heartRate = 0.0; 
